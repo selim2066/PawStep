@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pawstep</title>
+
+    <!-- For .png -->
+    <link
+      rel="shortcut icon"
+      href="assetsPawstep/logo.webp"
+      type="image/x-icon"
+    />
+
+    <!-- daisyCDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <header class="w-11/12 mx-auto">
+    <!-- navbar -->
+    <div class="navbar bg-base-100 p-10">
+     <div class="navbar-start">
+    <!-- Dropdown button: visible only on small screens -->
+    <div class="dropdown md:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost">
+        <img src="assetsPawstep/logo.webp" alt="Dropdown Logo" class="" />
+      </div>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>Home</a></li>
+        <li><a>Shop</a></li>
+        <li><a>Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Full Logo + Text: hidden on small, visible from md -->
+    <a class="btn btn-ghost hidden md:flex md:btn-md lg:btn-lg xl:btn-xl font-bold text-red-700 items-center gap-2">
+      <img class="p-3 " src="assetsPawstep/logo.webp" alt="Logo" />
+      <p class="md:text-3xl">PawStep</p>
+    </a>
+  </div>
+  <!-- nav mid -->
+      <div class="navbar-center hidden md:flex">
+        <ul class="menu menu-horizontal px-1">
+          <li>
+            <a class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl"
+              >Shop</a
+            >
+          </li>
+          <li>
+            <a class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+
+
+      <!-- head button -->
+      <div class="navbar-end">
+        <button
+          class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl rounded-full border-none bg-white shadow-none"
+        >
+          <img
+            src="https://img.icons8.com/?size=64&id=WCJ1D1cDlqqD&format=png"
+            alt="Human Head Icon"
+            class="object-cover sm:w-8 h-8 lg:w-full md:h-full"
+          />
+        </button>
+      </div>
+    </div>
+
+
+    <div class="navbar bg-base-100 p-10">
+  
+
+  <!-- Your existing center and end sections go here unchanged -->
+
+  </header>
+
+  <body></body>
+</html>
