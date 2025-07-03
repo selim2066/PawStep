@@ -63,7 +63,10 @@ function displayButtonCat(categories) {
             "text-3xl",
             "flex",
             "items-center",
-            "gap-4"
+            "gap-4",
+            "hover:bg-green-100",
+            "hover:rounded-[3rem]"
+
         );
         btn.innerHTML = `
         
@@ -75,12 +78,93 @@ function displayButtonCat(categories) {
         `;
 
 buttonContainer.appendChild(btn)
-        
-
-
-
-
     });
 
 }
+
+
+// ! cards
+
+// fetch data
+const pets = ()=>{
+    fetch('https://openapi.programming-hero.com/api/peddy/pets')
+    .then(response=>response.json())
+    .then(data => displayPetCards(data.pets))
+    .catch(error => console.log('got error', error))
+}
+
+// pet cards
+function displayPetCards(pets){
+const cardContainer=document.getElementById('cardContainer')
+pets.forEach(pet=>{
+    const div=document.createElement('div')
+    div.innerHTML=`
+    
+    <div class="card bg-base-100 shadow-sm">
+              <figure class="px-5 pt-5">
+                <img
+                  src="${pet.image}"
+                  alt="Shoes"
+                  class="rounded-xl"
+                />
+              </figure>
+              <div class="card-body">
+                <h2 class="card-title">${pet.category}</h2>
+                <div class="flex items-center gap-2">
+                  <img
+                    class="w-4 h-4"
+                    src="https://img.icons8.com/?size=100&id=gGUs3TPWpvgb&format=png&color=000000"
+                    alt=""
+                  />
+
+                  <p>Breed: ${pet.breed}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <img
+                    class="w-4 h-4"
+                    src="https://img.icons8.com/?size=100&id=60611&format=png&color=000000"
+                    alt=""
+                  />
+
+                  <p>Birth:${pet.date_of_birth}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <img
+                    class="w-4 h-4"
+                    src="https://img.icons8.com/?size=100&id=vSyNHi4ldAc5&format=png&color=000000"
+                    alt=""
+                  />
+
+                  <p>Gender: ${pet.gender}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <img
+                    class="w-4 h-4"
+                    src="https://img.icons8.com/?size=100&id=QHui8fGzf5rs&format=png&color=000000"
+                    alt=""
+                  />
+
+                  <p>Price: ${pet.price}</p>
+                </div>
+                <div class="card-actions flex gap-2 justify-between pt-2">
+                  <button class="btn">
+                    <img
+                      class="w-5"
+                      src="https://img.icons8.com/?size=100&id=24816&format=png&color=000000"
+                      alt=""
+                    />
+                  </button>
+                  <button class="btn text-[#0E7A81] font-bold">Adopt</button>
+                  <button class="btn text-[#0E7A81] font-bold">Details</button>
+                </div>
+              </div>
+            </div>
+
+    `
+
+    cardContainer.appendChild(div)
+})
+}
+
 loadCategories()
+pets()

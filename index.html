@@ -22,7 +22,7 @@
   </head>
 
   <body>
-    <header class="w-11/12 mx-auto">
+    <header class="w-11/12 mx-auto sticky top-0 z-50 bg-white ">
       <!-- navbar -->
       <div class="navbar bg-base-100 p-10">
         <div class="navbar-start">
@@ -142,7 +142,10 @@
     <!-- dynamic section main -->
     <main class="my-20">
       <!-- buttons category -->
-      <div id="buttonContainer" class="w-11/12 mx-auto flex gap-5 justify-center">
+      <div
+        id="buttonContainer"
+        class="w-11/12 mx-auto flex gap-5 justify-center my-10"
+      >
         <!-- <button class="btn px- py-2 w-[310px] h-[100px] rounded-4xl text-3xl">
           <img
             class="w-15"
@@ -150,6 +153,26 @@
             alt=""
           />Cats
         </button> -->
+      </div>
+
+      <!-- headline and buttonSort -->
+       <div class="w-11/12 mx-auto my-5 flex justify-between">
+        <h1 class="font-bold text-3xl">Best Deals for Your</h1>
+        <button class="btn px-5 py-7 font-bold text-2xl bg-[#0E7A81] text-white">Sort Price</button>
+       </div>
+
+      <!-- cards -->
+      <div class="w-11/12 mx-auto bg-red-300 grid grid-cols-5 gap-4">
+        <div class="col-span-4 bg-yellow-500">
+          <div id="cardContainer" class="grid md:grid-cols-4 mx-auto p-10 gap-5">
+            
+          </div>
+        </div>
+
+        <!-- liked item -->
+        <div class="grid grid-cols-2 gap-3 pt-10">
+          <p class="text-4xl">hi may name is selim</p>
+        </div>
       </div>
     </main>
 
