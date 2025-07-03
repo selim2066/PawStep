@@ -33,72 +33,135 @@ console.log(" https://openapi.programming-hero.com/api/peddy/categories")
 // ! Category by Button
 
 const loadCategories = () => {
-    fetch(' https://openapi.programming-hero.com/api/peddy/categories')
-        .then(response => response.json())
-        .then(data => displayButtonCat(data.categories))
-        .catch(error => console.error('Error fetching categories:', error));
+  fetch(' https://openapi.programming-hero.com/api/peddy/categories')
+    .then(response => response.json())
+    .then(data => displayButtonCat(data.categories))
+    .catch(error => console.error('Error fetching categories:', error));
 }
 
 function displayButtonCat(categories) {
-    console.log(categories);
-    const buttonContainer=document.getElementById('buttonContainer')
-    categories.forEach(category => {
-        const btn = document.createElement('button')
-        // btn.classList.add(
-        //     'btn',
-        //     'px-4',
-        //     'py-2',
-        //     'w-[310px]',
-        //     'h-[100px]',
-        //     'rounded-4xl',
-        //     'text-3xl'
-        // );
-        btn.classList.add(
-            "btn",
-            "px-4",
-            "py-2",
-            "w-[310px]",
-            "h-[100px]",
-            "rounded-2xl",
-            "text-3xl",
-            "flex",
-            "items-center",
-            "gap-4",
-            "hover:bg-green-100",
-            "hover:rounded-[3rem]"
+  console.log(categories);
+  const buttonContainer = document.getElementById('buttonContainer')
+  categories.forEach(category => {
+    const btn = document.createElement('div')
+    // btn.classList.add(
+    //     'btn',
+    //     'px-4',
+    //     'py-2',
+    //     'w-[310px]',
+    //     'h-[100px]',
+    //     'rounded-4xl',
+    //     'text-3xl'
+    // );
+    // btn.classList.add(
+    //     "btn",
+    //     "px-4",
+    //     "py-2",
+    //     "w-[310px]",
+    //     "h-[100px]",
+    //     "rounded-2xl",
+    //     "text-3xl",
+    //     "flex",
+    //     "items-center",
+    //     "gap-4",
+    //     "hover:bg-green-100",
+    //     "hover:rounded-[3rem]"
 
-        );
-        btn.innerHTML = `
-        
-        <img
-        class="w-16 h-16 object-contain"
-        src="${category.category_icon}"
-        alt=""
-        />${category.category}
-        `;
+    // );
+    // btn.innerHTML = ` 
 
-buttonContainer.appendChild(btn)
-    });
+    // <img 
+    // class="w-16 h-16 object-contain"
+    // src="${category.category_icon}"
+    // alt=""
+    // />${category.category}
+    // `;
+
+    btn.innerHTML = `
+  <button onclick='showCategory("${category.category}")' class="btn px-4 py-2 w-[310px] h-[100px] rounded-2xl text-3xl flex items-center gap-4 hover:bg-green-100 hover:rounded-[3rem]">
+    <img 
+      class="w-16 h-16 object-contain" 
+      src="${category.category_icon}" 
+      alt="${category.category}" 
+    />
+    ${category.category}
+  </button>
+`;
+
+    buttonContainer.appendChild(btn)
+  });
 
 }
+// https://openapi.programming-hero.com/api/peddy/category/dog
+// function showCategory(category){
+//  fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+//  .then(response=>response.json())
+// //  .then(data=>console.log(data.category))
+// .then(data=> displayPetCards(data.data))
+// .catch(error =>console.log(error))
+// }
+
+function showCategory(category) {
+  fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+    .then(res => res.json())
+    // .then(data =>console.log(data.data))
+    .then(data => displayPetCards(data.data))
+    .catch(error => console.error(error));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ! cards
 
 // fetch data
-const pets = ()=>{
-    fetch('https://openapi.programming-hero.com/api/peddy/pets')
-    .then(response=>response.json())
+const loadPets = () => {
+  fetch('https://openapi.programming-hero.com/api/peddy/pets')
+    .then(response => response.json())
     .then(data => displayPetCards(data.pets))
     .catch(error => console.log('got error', error))
 }
 
 // pet cards
-function displayPetCards(pets){
-const cardContainer=document.getElementById('cardContainer')
-pets.forEach(pet=>{
-    const div=document.createElement('div')
-    div.innerHTML=`
+function displayPetCards(pets) {
+  console.log(pets);
+  const cardContainer = document.getElementById('cardContainer')
+  cardContainer.innerHTML=''
+  // const liked = document.getElementById('liked')
+if(pets.length ==0){
+ cardContainer.classList.remove('grid', 'md:grid-cols-4', 'mx-auto', 'p-10', 'gap-5');
+ cardContainer.innerHTML=`
+ <div class="flex flex-col justify-center items-center space-y-6 p-10">
+    <img src="assetsPawstep/error.webp" alt="">
+    <h1 class="text-5xl text-center">Opps!! No Information Available</h1>
+    <p class='text-center'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at <br>
+its layout. The point of using Lorem Ipsum is that it has a.</p>
+</div>
+`;
+
+
+}else{
+  cardContainer.classList.add('grid', 'md:grid-cols-4', 'mx-auto', 'p-10', 'gap-5');
+
+}
+  pets.forEach(pet => {
+
+    const div = document.createElement('div')
+    div.innerHTML = `
     
     <div class="card bg-base-100 shadow-sm">
               <figure class="px-5 pt-5">
@@ -147,7 +210,7 @@ pets.forEach(pet=>{
                   <p>Price: ${pet.price}</p>
                 </div>
                 <div class="card-actions flex gap-2 justify-between pt-2">
-                  <button class="btn">
+                  <button onclick="likedImg('${pet.image}')" class="btn">
                     <img
                       class="w-5"
                       src="https://img.icons8.com/?size=100&id=24816&format=png&color=000000"
@@ -163,8 +226,22 @@ pets.forEach(pet=>{
     `
 
     cardContainer.appendChild(div)
-})
+  })
+}
+
+function likedImg(img) {
+  // alert('hi')
+  const liked = document.getElementById('liked')
+  const div = document.createElement('div')
+  div.innerHTML = `
+<img
+                      class="w-full rounded-lg"
+                      src="${img}"
+                      alt=""
+                    />
+`
+  liked.appendChild(div)
 }
 
 loadCategories()
-pets()
+loadPets()
