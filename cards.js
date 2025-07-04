@@ -78,40 +78,70 @@ function displayButtonCat(categories) {
     // `;
 
     btn.innerHTML = `
-  <button onclick='showCategory("${category.category}")' class="btn px-4 py-2 w-[310px] h-[100px] rounded-2xl text-3xl flex items-center gap-4 hover:bg-green-100 hover:rounded-[3rem]">
+  <div onclick='showCategory("${category.category}")' class="btn px-4 py-2 h-[75px] lg:w-[310px] md:h-[100px]  rounded-2xl text-3xl flex items-center gap-4 hover:bg-green-100 hover:rounded-[3rem]">
     <img 
       class="w-16 h-16 object-contain" 
       src="${category.category_icon}" 
       alt="${category.category}" 
     />
     ${category.category}
-  </button>
+  </div>
 `;
 
     buttonContainer.appendChild(btn)
   });
 
 }
-// https://openapi.programming-hero.com/api/peddy/category/dog
-// function showCategory(category){
-//  fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
-//  .then(response=>response.json())
-// //  .then(data=>console.log(data.category))
-// .then(data=> displayPetCards(data.data))
-// .catch(error =>console.log(error))
+
+
+//display cards by button category
+// function showCategory(category) {
+//   fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+//     .then(res => res.json())
+//     // .then(data =>console.log(data.data))
+//     .then(data => {
+
+
+//       displayPetCards(data.data)
+//     })
+
+//     .catch(error => console.error(error));
 // }
 
-function showCategory(category) {
-  fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
-    .then(res => res.json())
-    // .then(data =>console.log(data.data))
-    .then(data => {
 
+async function showCategory(category) {
+  showSpinner();
 
-      displayPetCards(data.data)
-    })
+  const start = Date.now(); // ⏱️ Start timing
 
-    .catch(error => console.error(error));
+  try {
+    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`);
+    const data = await res.json();
+
+    displayPetCards(data.data);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    const elapsed = Date.now() - start;
+    const delay = Math.max(0, 2000 - elapsed); // Wait remaining time if needed
+
+    setTimeout(() => {
+      hideSpinner();
+    }, delay);
+  }
+}
+
+//! challenge part
+const spinner = document.getElementById('loadingSpinner');
+
+function showSpinner() {
+  document.getElementById("loadingSpinner").classList.remove("hidden");
+  document.getElementById("cardContainer").classList.add("hidden"); // 🔒 hide cards
+}
+
+function hideSpinner() {
+  document.getElementById("loadingSpinner").classList.add("hidden");
+  document.getElementById("cardContainer").classList.remove("hidden"); // 🔓 show cards
 }
 
 
@@ -248,17 +278,17 @@ function likedImg(img) {
   liked.appendChild(div)
 }
 
-const loadDetails=async(id)=>{
-  const url =`https://openapi.programming-hero.com/api/peddy/pet/${id}`
+const loadDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/peddy/pet/${id}`
   const response = await fetch(url)
   const data = await response.json()
   displayDetails(data.petData)
 }
 
-function displayDetails(pet){
+function displayDetails(pet) {
   document.getElementById('modalDetails').showModal()
-  const modalContent =document.getElementById('modalContent')
-  modalContent.innerHTML=`
+  const modalContent = document.getElementById('modalContent')
+  modalContent.innerHTML = `
    <img
             src="${pet.image}"
             class="w-[636px] h-[320px] p-5 rounded-xl"
@@ -337,3 +367,14 @@ function displayDetails(pet){
 
 loadCategories()
 loadPets()
+
+
+
+// function showSpinner() {
+//   spinner.classList.remove('hidden');
+// }
+
+// function hideSpinner() {
+//   spinner.classList.add('hidden');
+// }
+
