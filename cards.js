@@ -105,7 +105,12 @@ function showCategory(category) {
   fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
     .then(res => res.json())
     // .then(data =>console.log(data.data))
-    .then(data => displayPetCards(data.data))
+    .then(data => {
+
+
+      displayPetCards(data.data)
+    })
+
     .catch(error => console.error(error));
 }
 
@@ -140,11 +145,11 @@ const loadPets = () => {
 function displayPetCards(pets) {
   console.log(pets);
   const cardContainer = document.getElementById('cardContainer')
-  cardContainer.innerHTML=''
+  cardContainer.innerHTML = ''
   // const liked = document.getElementById('liked')
-if(pets.length ==0){
- cardContainer.classList.remove('grid', 'md:grid-cols-4', 'mx-auto', 'p-10', 'gap-5');
- cardContainer.innerHTML=`
+  if (pets.length == 0) {
+    cardContainer.classList.remove('grid', 'md:grid-cols-4', 'mx-auto', 'p-10', 'gap-5');
+    cardContainer.innerHTML = `
  <div class="flex flex-col justify-center items-center space-y-6 p-10">
     <img src="assetsPawstep/error.webp" alt="">
     <h1 class="text-5xl text-center">Opps!! No Information Available</h1>
@@ -154,10 +159,10 @@ its layout. The point of using Lorem Ipsum is that it has a.</p>
 `;
 
 
-}else{
-  cardContainer.classList.add('grid', 'md:grid-cols-4', 'mx-auto', 'p-10', 'gap-5');
+  } else {
+    cardContainer.classList.add('grid', 'md:grid-cols-4', 'mx-auto', 'p-10', 'gap-5');
 
-}
+  }
   pets.forEach(pet => {
 
     const div = document.createElement('div')
@@ -189,7 +194,7 @@ its layout. The point of using Lorem Ipsum is that it has a.</p>
                     alt=""
                   />
 
-                  <p>Birth:${pet.date_of_birth}</p>
+                  <p>Birth: ${pet.date_of_birth}</p>
                 </div>
                 <div class="flex items-center gap-2">
                   <img
@@ -218,7 +223,7 @@ its layout. The point of using Lorem Ipsum is that it has a.</p>
                     />
                   </button>
                   <button class="btn text-[#0E7A81] font-bold">Adopt</button>
-                  <button class="btn text-[#0E7A81] font-bold">Details</button>
+                  <button onclick='loadDetails(${pet.petId})' id='detail-${pet.petId}' class="btn text-[#0E7A81] font-bold">Details</button>
                 </div>
               </div>
             </div>
@@ -241,6 +246,93 @@ function likedImg(img) {
                     />
 `
   liked.appendChild(div)
+}
+
+const loadDetails=async(id)=>{
+  const url =`https://openapi.programming-hero.com/api/peddy/pet/${id}`
+  const response = await fetch(url)
+  const data = await response.json()
+  displayDetails(data.petData)
+}
+
+function displayDetails(pet){
+  document.getElementById('modalDetails').showModal()
+  const modalContent =document.getElementById('modalContent')
+  modalContent.innerHTML=`
+   <img
+            src="${pet.image}"
+            class="w-[636px] h-[320px] p-5 rounded-xl"
+            alt=""
+          />
+          <div>
+            <h1 class="text-2xl font-bold">${pet.pet_name}</h1>
+            <div class="p-5 border-gray-300 border-b-[3px]">
+              <div class="flex">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="w-4 h-4"
+                      src="https://img.icons8.com/?size=100&id=gGUs3TPWpvgb&format=png&color=000000"
+                      alt=""
+                    />
+                    <p>Breed: ${pet.breed}</p>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="w-4 h-4"
+                      src="https://img.icons8.com/?size=100&id=vSyNHi4ldAc5&format=png&color=000000"
+                      alt=""
+                    />
+                    <p>Gender: ${pet.gender}</p>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="w-4 h-4"
+                      src="https://img.icons8.com/?size=100&id=vSyNHi4ldAc5&format=png&color=000000"
+                      alt=""
+                    />
+                    <p>Vaccinated Status: ${pet.vaccinated_status}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="w-4 h-4"
+                      src="https://img.icons8.com/?size=100&id=60611&format=png&color=000000"
+                      alt=""
+                    />
+                    <p>Birth: ${pet.date_of_birth.split("-")[0]}</p>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <img
+                      class="w-4 h-4"
+                      src="https://img.icons8.com/?size=100&id=QHui8fGzf5rs&format=png&color=000000"
+                      alt=""
+                    />
+                    <p>Price: ${pet.price}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 class="font-bold text-lg pt-4">Details Information</h2>
+              <p>
+              ${pet.pet_details}
+                </p>
+
+              <div class="modal-action">
+                <form method="dialog">
+                  <button class="btn w-[460px] bg-[#0E7A81]/20 mx-auto flex justify-center text-center">Cancel</button>
+                </form>
+                
+              </div>
+            </div>
+          </div>
+  `
 }
 
 loadCategories()
