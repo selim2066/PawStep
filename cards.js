@@ -207,7 +207,7 @@ its layout. The point of using Lorem Ipsum is that it has a.</p>
                 />
               </figure>
               <div class="card-body">
-                <h2 class="card-title">${pet.category}</h2>
+                <h2 class="card-title">${pet.pet_name}</h2>
                 <div class="flex items-center gap-2">
                   <img
                     class="w-4 h-4"
@@ -252,7 +252,7 @@ its layout. The point of using Lorem Ipsum is that it has a.</p>
                       alt=""
                     />
                   </button>
-                  <button class="btn text-[#0E7A81] font-bold">Adopt</button>
+                  <button onclick='displayCountdown(${pet.petId})' id='adopt-${pet.petId}' class="btn text-[#0E7A81] font-bold">Adopt</button>
                   <button onclick='loadDetails(${pet.petId})' id='detail-${pet.petId}' class="btn text-[#0E7A81] font-bold">Details</button>
                 </div>
               </div>
@@ -268,9 +268,10 @@ function likedImg(img) {
   // alert('hi')
   const liked = document.getElementById('liked')
   const div = document.createElement('div')
+  div.classList.add('aspect-square', 'w-full');
+
   div.innerHTML = `
-<img
-                      class="w-full rounded-lg"
+<img class="w-full h-full object-cover rounded-lg"
                       src="${img}"
                       alt=""
                     />
@@ -363,6 +364,30 @@ function displayDetails(pet) {
             </div>
           </div>
   `
+}
+
+function displayCountdown(petId) {
+  document.getElementById('countModal').showModal()
+  const adopt = document.getElementById(`adopt-${petId}`);
+  const value = document.getElementById("count");
+
+  let count = 3;
+  // Reset display value immediately
+  value.style.setProperty('--value', count);
+
+  // Show modal AFTER resetting value
+  document.getElementById('countModal').showModal()
+
+  const countdownTimer = setInterval(() => {
+    if (count == 1) {
+      adopt.classList.add('bg-red-500','text-white')
+      adopt.innerText ='Adopted'
+      clearInterval(countdownTimer)
+    } else {
+      count--;
+      value.style.setProperty('--value', count);
+    }
+  }, 1000);
 }
 
 loadCategories()

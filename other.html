@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- daisyCDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="bg-red-50 flex">
+      <span class="countdown font-mono text-6xl mx-auto p-20 bg-red-400">
+        <span id="count" style="--value: 3" aria-live="polite" aria-label="59"
+          >3</span
+        >
+      </span>
+    </div>
+
+    <script>
+      const value = document.getElementById("count");
+      let count=3;
+      const id= setInterval(() => {
+        if(count ==0){
+            clearInterval(id)
+        }else{
+            count--;
+            value.style.setProperty('--value', count);
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

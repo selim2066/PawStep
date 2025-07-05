@@ -88,6 +88,8 @@
       </div>
     </header>
 
+    <!-- <button class="btn" onclick="countModal.showModal()">open modal</button> -->
+
     <!-- hero -->
     <div class="mx-auto text-center space-y-3 my-10">
       <p class="text-[24px] text-gray-500 font-semibold">
@@ -165,7 +167,7 @@
       </div>
 
       <!-- cards -->
-      <div class="w-11/12 mx-auto bg-red-300 grid grid-cols-5 gap-4">
+      <div class="w-11/12 mx-auto grid grid-cols-5 gap-4">
         <!-- loading -->
         <!-- Spinner Overlay -->
         <div
@@ -176,7 +178,7 @@
         </div>
 
         <!-- theCard -->
-        <div class="col-span-4 bg-yellow-500">
+        <div class="col-span-4">
           <div
             id="cardContainer"
             class="grid md:grid-cols-4 mx-auto p-10 gap-5"
@@ -184,18 +186,50 @@
         </div>
 
         <!-- liked item -->
-        <div id="liked" class="grid grid-cols-2 gap-3 pt-10 px-5"></div>
+        <div
+          id="liked"
+          class="grid grid-cols-2 gap-3 pt-10 px-5 shadow-lg rounded-lg"
+        ></div>
       </div>
     </main>
 
     <!-- modal -->
+
+    <!-- challenges part: adoptModal ie countdown Modal -->
+    <dialog id="countModal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <div class="flex justify-center relative h-[350px]">
+          <span class="countdown font-mono text-6xl mx-auto flex items-center justify-center ">
+            <span
+              id="count"
+              style="--value: 3"
+              aria-live="polite"
+              aria-label="3"
+              >3</span
+            >
+            
+          </span>
+          <span
+              class="loading loading-ring w-24 h-24 text-red-500 absolute mx-auto top-31"
+            ></span>
+        </div>
+      </div>
+
+      <!-- ✅ Add a backdrop button -->
+      <form method="dialog" class="modal-backdrop">
+        <button></button>
+      </form>
+    </dialog>
+
     <!-- Open the modal using ID.showModal() method -->
-    <!-- <button class="btn hidden  " onclick="my_modal_5.showModal()">open modal</button> -->
+
     <dialog id="modalDetails" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
         <div id="modalContent"></div>
       </div>
     </dialog>
+
+    <!-- Open the modal using ID.showModal() method -->
 
     <!-- footer -->
     <footer class="bg-black text-white p-10">
@@ -247,7 +281,7 @@
         <span class="loading loading-ring loading-xl"></span>
       </div>
     </footer>
-
+    <script></script>
     <script src="cards.js"></script>
   </body>
 </html>
