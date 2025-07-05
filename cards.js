@@ -245,15 +245,15 @@ its layout. The point of using Lorem Ipsum is that it has a.</p>
                   <p>Price: ${pet.price}</p>
                 </div>
                 <div class="card-actions flex gap-2 justify-between pt-2">
-                  <button onclick="likedImg('${pet.image}')" class="btn">
+                  <button onclick="likedImg('${pet.image}')" class="btn text-2xl">
                     <img
-                      class="w-5"
+                      class="w-7"
                       src="https://img.icons8.com/?size=100&id=24816&format=png&color=000000"
                       alt=""
                     />
                   </button>
-                  <button onclick='displayCountdown(${pet.petId})' id='adopt-${pet.petId}' class="btn text-[#0E7A81] font-bold">Adopt</button>
-                  <button onclick='loadDetails(${pet.petId})' id='detail-${pet.petId}' class="btn text-[#0E7A81] font-bold">Details</button>
+                  <button onclick='displayCountdown(${pet.petId})' id='adopt-${pet.petId}' class="btn text-[#0E7A81] font-bold text-2xl">Adopt</button>
+                  <button onclick='loadDetails(${pet.petId})' id='detail-${pet.petId}' class="btn text-[#0E7A81] font-bold text-2xl">Details</button>
                 </div>
               </div>
             </div>
