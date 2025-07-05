@@ -252,8 +252,8 @@ its layout. The point of using Lorem Ipsum is that it has a.</p>
                       alt=""
                     />
                   </button>
-                  <button onclick='displayCountdown(${pet.petId})' id='adopt-${pet.petId}' class="btn text-[#0E7A81] font-bold text-2xl">Adopt</button>
-                  <button onclick='loadDetails(${pet.petId})' id='detail-${pet.petId}' class="btn text-[#0E7A81] font-bold text-2xl">Details</button>
+                  <button onclick='displayCountdown(${pet.petId})' id='adopt-${pet.petId}' class="btn text-[#0E7A81] font-bold text-lg">Adopt</button>
+                  <button onclick='loadDetails(${pet.petId})' id='detail-${pet.petId}' class="btn text-[#0E7A81] font-bold text-lg">Details</button>
                 </div>
               </div>
             </div>
